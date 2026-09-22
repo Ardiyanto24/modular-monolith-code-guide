@@ -1,0 +1,52 @@
+{
+  "name": "modular-monolith-code-guide",
+  "version": "1.0.0",
+  "description": "Universal, product-agnostic AI coding guide (backend Go modular monolith, PostgreSQL, Next.js Atomic Design, Git/CI-CD) — installs as a skill/rules file for Claude Code, Codex, Cursor, Gemini CLI, and Google Antigravity.",
+  "bin": {
+    "modular-monolith-code-guide": "bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "SKILL.md",
+    "AGENTS.md",
+    "GEMINI.md",
+    ".cursor",
+    "references",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "ai",
+    "agents",
+    "agents-md",
+    "claude-code",
+    "claude-skill",
+    "codex",
+    "cursor",
+    "gemini-cli",
+    "antigravity",
+    "coding-standards",
+    "modular-monolith",
+    "atomic-design",
+    "golang",
+    "nextjs",
+    "postgresql",
+    "cli"
+  ],
+  "license": "MIT",
+  "author": "Ardiyanto",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ardiyanto24/modular-monolith-code-guide.git"
+  },
+  "homepage": "https://github.com/Ardiyanto24/modular-monolith-code-guide#readme",
+  "bugs": {
+    "url": "https://github.com/Ardiyanto24/modular-monolith-code-guide/issues"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

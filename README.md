@@ -1,5 +1,6 @@
 # Modular Monolith Code Guide
 
+[![npm](https://img.shields.io/npm/v/modular-monolith-code-guide?color=cb3837&logo=npm&logoColor=white)](https://www.npmjs.com/package/modular-monolith-code-guide)
 [![License: MIT](https://img.shields.io/github/license/Ardiyanto24/modular-monolith-code-guide?color=blue)](LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/Ardiyanto24/modular-monolith-code-guide?style=flat&color=yellow)](https://github.com/Ardiyanto24/modular-monolith-code-guide/stargazers)
 [![Last commit](https://img.shields.io/github/last-commit/Ardiyanto24/modular-monolith-code-guide)](https://github.com/Ardiyanto24/modular-monolith-code-guide/commits/main)
@@ -16,10 +17,33 @@ Empat panduan instruksi AI (dalam Bahasa Indonesia) untuk membangun aplikasi den
 
 Dokumen-dokumen ini awalnya ditulis sebagai instruksi kerja internal untuk satu produk, lalu digeneralisasi jadi template universal — seluruh referensi ke produk/perusahaan aslinya sudah dihapus dan diganti placeholder (`{module}`, `{domain}`, dst.) supaya bisa dipakai ulang di project apa pun.
 
+## Quick start (npx)
+
+Cara tercepat — jalankan di root project Anda, tidak perlu clone/install apa pun:
+
+```bash
+npx modular-monolith-code-guide
+```
+
+Tanpa flag, CLI akan menanyakan tool mana yang mau dipasangi (Claude Code, Codex, Cursor, Gemini CLI, Antigravity — bisa pilih beberapa sekaligus atau Enter untuk semua). Untuk non-interaktif (mis. di script/CI):
+
+```bash
+npx modular-monolith-code-guide --all              # semua tool
+npx modular-monolith-code-guide --cursor --codex   # tool tertentu saja
+npx modular-monolith-code-guide --claude --user    # skill Claude Code level user (~/.claude/skills), bukan project ini
+npx modular-monolith-code-guide --dir ./apps/api   # install ke direktori lain, bukan cwd
+npx modular-monolith-code-guide --force            # timpa file yang sudah ada
+npx modular-monolith-code-guide --help             # semua opsi
+```
+
+File yang sudah ada di target tidak akan ditimpa kecuali `--force` — aman dijalankan berulang kali. Kalau lebih suka copy manual tanpa Node/npm, lihat [Cara pakai per tool](#cara-pakai-per-tool) di bawah.
+
 ## Isi
 
 ```
 modular-monolith-code-guide/
+├── bin/cli.js                      # CLI installer (dijalankan lewat `npx modular-monolith-code-guide`)
+├── package.json
 ├── SKILL.md                        # entry point untuk Claude Code
 ├── AGENTS.md                       # entry point cross-tool (Codex, Cursor, Antigravity, dst.)
 ├── GEMINI.md                       # entry point untuk Gemini CLI (import @AGENTS.md)
@@ -42,7 +66,7 @@ Bagian yang ditandai **`[Opsional]`** (mis. pola database multi-tenant, CLI tool
 
 ## Cara pakai per tool
 
-Prinsip umum: **copy isi repo ini (bukan foldernya sendiri) ke root project Anda**, kecuali disebutkan lain. Semua path relatif di dalam `AGENTS.md`/`.mdc` mengasumsikan `references/` ada satu level sejajar.
+Ini instruksi copy-manual (tanpa `npx`) kalau Anda lebih suka begitu, atau ingin paham persis apa yang dipasang `npx modular-monolith-code-guide` di baliknya. Prinsip umum: **copy isi repo ini (bukan foldernya sendiri) ke root project Anda**, kecuali disebutkan lain. Semua path relatif di dalam `AGENTS.md`/`.mdc` mengasumsikan `references/` ada satu level sejajar.
 
 ### 1. Claude Code (`SKILL.md`)
 
