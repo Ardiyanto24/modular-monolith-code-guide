@@ -1,0 +1,20 @@
+---
+description: Konvensi skema PostgreSQL, migrasi golang-migrate, boundary data lintas module, dan indexing
+globs: ["migrations/**/*.sql","**/*_model.go","**/*migration*"]
+alwaysApply: false
+---
+
+# Database PostgreSQL
+
+Panduan lengkap: [`../../references/DATABASE_GUIDE.md`](../../references/DATABASE_GUIDE.md) — baca file itu sebelum menyentuh skema/migrasi.
+
+Ringkasan aturan yang wajib dipatuhi:
+
+- Migrasi ditulis raw SQL lewat `golang-migrate`, format `NNNN_description.up.sql`/`.down.sql` — bukan ORM migration tool otomatis.
+- Nama tabel snake_case plural, nama kolom snake_case, FK bersuffix `_id` dan wajib diberi index.
+- Primary key `UUID` native (`gen_random_uuid()`), bukan autoincrement integer.
+- `created_at`/`updated_at` wajib ada di tiap tabel non-junction, kecuali pengecualian yang didokumentasikan eksplisit.
+- Kolom payload/konfigurasi yang memang didesain bebas bentuk (`jsonb`) **dilarang** dipecah jadi kolom terpisah — validasi struktur ada di application layer, bukan di database.
+- Satu module **dilarang** mengakses tabel milik module lain secara langsung — lewat interface Go module pemilik data. Tidak ada FK yang menyeberang dua database fisik berbeda.
+- Kalau project ini memakai pola multi-tenant dengan database terisolasi per-tenant, baca §0 dan §4 `DATABASE_GUIDE.md` untuk aturan migrasi cetakan/replay — kalau bukan, lewati bagian itu.
+- Sebelum melaporkan perubahan skema "selesai", jalankan checklist di §8 `DATABASE_GUIDE.md`.

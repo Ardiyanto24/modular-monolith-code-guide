@@ -1,0 +1,19 @@
+---
+description: Aturan struktur module, layer (interface/service/repository/handler), komunikasi antar module, dan coding standard untuk backend Go modular monolith
+globs: ["backend/**/*.go","**/go.mod","**/cmd/**/*.go","**/internal/**/*.go"]
+alwaysApply: false
+---
+
+# Backend Go Modular Monolith
+
+Panduan lengkap: [`../../references/BACKEND_GUIDE.md`](../../references/BACKEND_GUIDE.md) — baca file itu sebelum scaffold module baru atau menata ulang struktur backend.
+
+Ringkasan aturan yang wajib dipatuhi:
+
+- Satu binary, banyak module di `internal/modules/{module}/`. Module lain dipanggil lewat **interface Go** (`{module}_interface.go`), bukan HTTP — tidak ada `internal/clients/` untuk komunikasi antar module dalam binary yang sama.
+- Layer wajib per module: `{module}_interface.go` → `{module}_service.go` → `{module}_repository.go` → `{module}_model.go`, plus `{module}_dto.go`/`{module}_handler.go` hanya kalau module punya endpoint HTTP sendiri.
+- Repository satu module **dilarang** query tabel milik module lain — akses lintas module wajib lewat interface module pemilik data.
+- Migrasi lewat `golang-migrate`, **`db.AutoMigrate()` dilarang** di jalur produksi.
+- `context.Context` wajib jadi parameter pertama di setiap method service/repository yang melakukan I/O, termasuk saat memanggil interface module lain.
+- Ganti placeholder `{module}`, `{project}` dengan nama nyata sesuai domain bisnis project ini — jangan biarkan placeholder literal muncul di kode.
+- Sebelum melaporkan module/endpoint baru "selesai", jalankan checklist di §12 `BACKEND_GUIDE.md`.

@@ -1,0 +1,17 @@
+---
+description: Strategi branching, format commit, tagging/versioning, dan aturan CI/CD untuk repo modular monolith. Berlaku saat membuat branch, menyusun pesan commit, membuka PR, atau mempertimbangkan tag rilis/deploy.
+alwaysApply: false
+---
+
+# Git Strategy & CI/CD
+
+Panduan lengkap: [`../../references/GIT_GUIDE.md`](../../references/GIT_GUIDE.md) — baca file itu sebelum membuat branch/commit/tag.
+
+Ringkasan aturan yang wajib dipatuhi:
+
+- Satu branch utama `main`. Feature branch: `feat/{module}-{deskripsi}`, `fix/{module}-{deskripsi}`, `chore/{module}-{deskripsi}` — prefix menyebut **module**, bukan nama service.
+- **Commit granular per module dan per layer** — dilarang satu commit menyentuh lebih dari satu module sekaligus (kecuali perubahan root-level atau wiring kecil satu arah). Format: `type(scope): deskripsi`, scope menyebut module secara eksplisit.
+- Tag rilis format `backend@{semver}` / `cli@{semver}` — **selalu menunggu instruksi eksplisit user**, tidak pernah dianggap diizinkan otomatis hanya karena staging stabil.
+- **Aksi yang wajib menunggu instruksi eksplisit user** (jangan lakukan sendiri tanpa konfirmasi): membuat repository baru, push pertama ke remote baru, merge PR besar ke `main`, membuat git tag rilis, deploy manual ke production, mengubah workflow CI/CD yang menyentuh kredensial produksi, migrasi database massal lintas banyak database sekaligus.
+- **Boleh otomatis**: `git init`, commit lokal ke feature branch, push feature branch ke remote yang sudah ada, membuka Pull Request, deploy staging otomatis dari CI.
+- Sebelum melaporkan pekerjaan git "selesai", jalankan checklist di §6 `GIT_GUIDE.md`.

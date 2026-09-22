@@ -39,3 +39,7 @@ Kalau hanya sempat membaca satu paragraf, ini intisarinya:
 ## Bahasa
 
 Seluruh isi dokumen referensi ditulis dalam Bahasa Indonesia, mengikuti gaya penulisan "aturan mutlak" (source of truth) yang tegas dan langsung ke aturan, dengan tabel dan checklist. Kalau user meminta versi Bahasa Inggris, terjemahkan per dokumen saat dibutuhkan — jangan menerjemahkan semuanya di muka tanpa diminta.
+
+## Tool lain
+
+Repo ini juga menyediakan `AGENTS.md` (Codex, Cursor, Antigravity), `GEMINI.md` (Gemini CLI), dan `.cursor/rules/*.mdc` (Cursor) sebagai pointer setara ke `references/` yang sama — lihat `README.md` untuk cara instalasi per tool.

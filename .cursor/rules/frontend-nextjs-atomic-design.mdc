@@ -1,0 +1,21 @@
+---
+description: Struktur Next.js App Router dan Atomic Design (atoms/molecules/organisms/templates) untuk frontend
+globs: ["frontend/**/*.tsx","frontend/**/*.ts","**/*.module.css","**/app/**/page.tsx","**/components/**/*"]
+alwaysApply: false
+---
+
+# Frontend Next.js + Atomic Design
+
+Panduan lengkap: [`../../references/FRONTEND_GUIDE.md`](../../references/FRONTEND_GUIDE.md) — baca file itu sebelum membuat halaman/komponen baru.
+
+Ringkasan aturan yang wajib dipatuhi:
+
+- `page.tsx` **hanya** fetch data lalu memanggil `<{RouteName}Template />` — dilarang berisi JSX section langsung.
+- **1 Route = 1 Template**, wajib ada di `components/templates/{RouteName}Template/{RouteName}Template.tsx`.
+- Setiap "section" halaman = 1 komponen Organism di `components/organisms/{route-name}/{RouteName}{SectionName}/`, nama route sama persis dengan folder route-nya.
+- Semua molecule baru default ke `molecules/shared/`, kecuali punya business logic yang eksplisit terikat ke satu halaman.
+- **Setiap komponen (Atom/Molecule/Organism/Template) wajib punya folder sendiri** + file `.module.css` pasangan dengan nama identik — kecuali komponen ikon murni tanpa styling (dicatat eksplisit).
+- Import lewat path alias ke file `.tsx` di dalam folder komponennya (`@/components/atoms/Button/Button`), bukan folder tanpa nama file.
+- Server Components secara default, `'use client'` sedekat mungkin ke leaf component (pola client islands) — hindari `*PageClient.tsx`.
+- **Search-before-create**: cek `organisms/shared/` dan `molecules/shared/` dulu sebelum bikin komponen baru; jangan buat varian (`*V2`, `*New`) kalau komponen serupa sudah ada.
+- Sebelum melaporkan halaman baru "selesai", jalankan checklist di §9 `FRONTEND_GUIDE.md`.
