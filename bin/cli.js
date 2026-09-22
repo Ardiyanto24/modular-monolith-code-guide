@@ -63,7 +63,7 @@ function printHelp() {
 modular-monolith-code-guide - pasang panduan arsitektur & coding standard ke project Anda
 
 Usage:
-  npx modular-monolith-code-guide [options]
+  npx github:Ardiyanto24/modular-monolith-code-guide [options]
 
 Options:
   --all              install untuk semua tool (Claude Code, Codex, Cursor, Gemini CLI, Antigravity)
